@@ -1,0 +1,331 @@
+"""
+Core module for PulseOps healthcare management system.
+
+This module provides core functionality including configuration management,
+constants, exceptions, permissions, and security utilities.
+All core components are centrally managed and exported from this module.
+"""
+
+# Configuration exports
+from .config import (
+    Config,
+    get_config,
+    get_app_config,
+    get_auth_config,
+    get_cache_config,
+    get_database_config,
+    get_logging_config,
+    get_notification_config,
+    get_payment_config,
+    get_security_config,
+    get_subscription_config,
+    get_whatsapp_config,
+    is_development,
+    is_production,
+    is_testing,
+    AppConfig,
+    AuthenticationConfig,
+    CacheConfig,
+    DatabaseConfig,
+    LoggingConfig,
+    NotificationConfig,
+    PaymentConfig,
+    SecurityConfig,
+    SubscriptionConfig,
+    WhatsAppConfig,
+)
+
+# Constants exports
+from .constants import (
+    # Subscription constants
+    SUBSCRIPTION_PLANS,
+    PLAN_LIMITS,
+    PLAN_FEATURES,
+    BILLING_INTERVALS,
+    PLAN_STATUS,
+    # WhatsApp constants
+    WHATSAPP_MESSAGE_TYPES,
+    WHATSAPP_TEMPLATES,
+    WHATSAPP_WEBHOOK_EVENTS,
+    WHATSAPP_API_ENDPOINTS,
+    # Medical constants
+    MEDICAL_SPECIALTIES,
+    COMMON_CONDITIONS,
+    PRESCRIPTION_TYPES,
+    DOSAGE_UNITS,
+    FREQUENCY_OPTIONS,
+    # Business constants
+    QUEUE_STATUS,
+    TOKEN_STATUS,
+    PAYMENT_STATUS,
+    VISIT_STATUS,
+    APPOINTMENT_TYPES,
+    # API constants
+    HTTP_STATUS_CODES,
+    API_RESPONSE_FORMATS,
+    PAGINATION_DEFAULTS,
+    RATE_LIMIT_HEADERS,
+    CONTENT_TYPES,
+)
+
+# Exception exports
+from .exceptions import (
+    # Base exceptions
+    PulseOpsException,
+    ErrorCode,
+    ErrorSeverity,
+    ValidationError,
+    # Authentication exceptions
+    AuthenticationError,
+    InvalidCredentialsError,
+    TokenExpiredError,
+    TokenInvalidError,
+    PermissionDeniedError,
+    # Resource exceptions
+    ResourceNotFoundError,
+    ResourceAlreadyExistsError,
+    ResourceConflictError,
+    ResourceValidationError,
+    # Business logic exceptions
+    BusinessLogicError,
+    ClinicOperationError,
+    QueueOperationError,
+    PaymentProcessingError,
+    AppointmentSchedulingError,
+    # External service exceptions
+    ExternalServiceError,
+    WhatsAppAPIError,
+    PaymentGatewayError,
+    DatabaseConnectionError,
+    # Subscription exceptions
+    SubscriptionError,
+    SubscriptionExpiredError,
+    SubscriptionLimitExceededError,
+    SubscriptionUpgradeRequiredError,
+    # Security exceptions
+    SecurityViolationError,
+    RateLimitExceededError,
+    InvalidInputError,
+    DataIntegrityError,
+)
+
+# Permission exports
+from .permissions import (
+    # Roles and permissions
+    UserRole,
+    UserStatus,
+    Permission,
+    ROLE_PERMISSIONS,
+    # JWT payload
+    JWTPayload,
+    # Permission decorators
+    require_permission,
+    require_role,
+    require_authenticated,
+    require_clinic_access,
+    # FastAPI dependencies
+    get_current_user,
+    get_current_user_with_permissions,
+    verify_clinic_access,
+    verify_doctor_access,
+    verify_patient_access,
+    # Validation functions
+    validate_clinic_isolation,
+    validate_doctor_association,
+    validate_patient_association,
+)
+
+# Security exports
+from .security import (
+    # Password security
+    PasswordManager,
+    hash_password,
+    verify_password,
+    generate_secure_password,
+    # JWT management
+    JWTManager,
+    create_access_token,
+    create_refresh_token,
+    verify_token,
+    decode_token,
+    # OTP management
+    OTPManager,
+    generate_otp,
+    verify_otp,
+    PasswordSecurity,
+    JWTSecurity,
+    OTPSecurity,
+    DataEncryption,
+    AuditLogger,
+    RateLimiter,
+    password_security,
+    jwt_security,
+    otp_security,
+    data_encryption,
+    audit_logger,
+    rate_limiter,
+    generate_correlation_id,
+    sanitize_input,
+    validate_whatsapp_number,
+    validate_dynamodb_key,
+    sanitize_healthcare_data,
+    security_context,
+)
+
+from .permissions import (
+    UserRole,
+    UserStatus,
+    Permission,
+    DataAccessScope,
+    JWTPayload,
+    get_permissions_for_role,
+    get_data_access_scope,
+    create_jwt_payload,
+    get_current_user,
+    get_admin_user,
+    get_doctor_user,
+    require_permission,
+    require_any_permission,
+    require_role,
+    admin_only,
+    doctor_only,
+)
+
+from .exceptions import (
+    ErrorCode,
+    PulseOpsException,
+    AuthenticationError,
+    AuthorizationError,
+    ResourceError,
+    BusinessLogicError,
+    ValidationError,
+    ExternalServiceError,
+    SubscriptionError,
+    SecurityError,
+    InvalidCredentialsError,
+    TokenExpiredError,
+    InvalidTokenError,
+    OTPExpiredError,
+    OTPInvalidError,
+    ResourceNotFoundError,
+    ResourceAlreadyExistsError,
+    DoctorLimitExceededError,
+    WhatsAppServiceError,
+    PaymentServiceError,
+    RateLimitExceededError,
+    create_http_exception,
+    get_error_message,
+)
+
+from .constants import (
+    SubscriptionPlan,
+    SubscriptionStatus,
+    QueueStatus,
+    TokenStatus,
+    PaymentStatus,
+    ConsultationType,
+    MessageTemplate,
+    ErrorSeverity,
+    SUBSCRIPTION_PLANS,
+    BASIC_PLAN_CONFIG,
+    PROFESSIONAL_PLAN_CONFIG,
+    ENTERPRISE_PLAN_CONFIG,
+    OTP_MESSAGE_TEMPLATES,
+    NOTIFICATION_TEMPLATES,
+    DEFAULT_CONSULTATION_DURATION,
+    MAX_DAILY_TOKENS,
+    DEFAULT_ADVANCE_AMOUNT,
+)
+
+
+# Public API exports
+__all__ = [
+    # Configuration
+    "get_config",
+    "get_auth_config",
+    "get_database_config",
+    "get_whatsapp_config",
+    "get_security_config",
+    "get_logging_config",
+    "get_app_config",
+    "is_production",
+    "is_development",
+    # Security utilities
+    "PasswordSecurity",
+    "JWTSecurity",
+    "OTPSecurity",
+    "DataEncryption",
+    "AuditLogger",
+    "RateLimiter",
+    "password_security",
+    "jwt_security",
+    "otp_security",
+    "data_encryption",
+    "audit_logger",
+    "rate_limiter",
+    "generate_correlation_id",
+    "sanitize_input",
+    "validate_whatsapp_number",
+    "validate_dynamodb_key",
+    "sanitize_healthcare_data",
+    "security_context",
+    # Permissions and access control
+    "UserRole",
+    "UserStatus",
+    "Permission",
+    "DataAccessScope",
+    "JWTPayload",
+    "get_permissions_for_role",
+    "get_data_access_scope",
+    "create_jwt_payload",
+    "get_current_user",
+    "get_admin_user",
+    "get_doctor_user",
+    "require_permission",
+    "require_any_permission",
+    "require_role",
+    "admin_only",
+    "doctor_only",
+    # Exceptions
+    "ErrorCode",
+    "PulseOpsException",
+    "AuthenticationError",
+    "AuthorizationError",
+    "ResourceError",
+    "BusinessLogicError",
+    "ValidationError",
+    "ExternalServiceError",
+    "SubscriptionError",
+    "SecurityError",
+    "InvalidCredentialsError",
+    "TokenExpiredError",
+    "InvalidTokenError",
+    "OTPExpiredError",
+    "OTPInvalidError",
+    "ResourceNotFoundError",
+    "ResourceAlreadyExistsError",
+    "DoctorLimitExceededError",
+    "WhatsAppServiceError",
+    "PaymentServiceError",
+    "RateLimitExceededError",
+    "create_http_exception",
+    "get_error_message",
+    # Constants and enums
+    "SubscriptionPlan",
+    "SubscriptionStatus",
+    "QueueStatus",
+    "TokenStatus",
+    "PaymentStatus",
+    "ConsultationType",
+    "MessageTemplate",
+    "ErrorSeverity",
+    "SUBSCRIPTION_PLANS",
+    "BASIC_PLAN_CONFIG",
+    "PROFESSIONAL_PLAN_CONFIG",
+    "ENTERPRISE_PLAN_CONFIG",
+    "OTP_MESSAGE_TEMPLATES",
+    "NOTIFICATION_TEMPLATES",
+    "DEFAULT_CONSULTATION_DURATION",
+    "MAX_DAILY_TOKENS",
+    "DEFAULT_ADVANCE_AMOUNT",
+]
